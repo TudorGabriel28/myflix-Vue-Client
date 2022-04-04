@@ -1,0 +1,34 @@
+@require "/colors.styl"
+@require "/utils.styl"
+
+.input, .input-small
+  border none
+  outline none
+  width 100%
+  background $background-black-input
+  color $text-white
+  padding remify(12px) 0 remify(12px) remify(10px)
+  margin-top remify(24px)
+  border-radius remify(12px)
+  box-shadow 0 remify(6px) remify(30px) $shadow-color
+  font-size remify(16px)
+  caret-color $primary-blue
+
+.input:focus
+  border 1px solid $border-gray
+.input:disabled
+  color $text-gray
+  background-color $background-disabled
+  border 1px solid $border-gray
+input::placeholder
+ color $text-light-gray-placeholder
+
+.input-small
+  padding remify(6px) remify(40px) remify(6px) remify(10px)
+
+
+
+
+
+
+

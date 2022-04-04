@@ -1,0 +1,26 @@
+@require "/colors.styl"
+@require "/utils.styl"
+
+.button, .button-small
+  border none
+  white-space nowrap
+  background-color $primary-blue
+  color white
+  padding remify(12px) remify(51px)
+  border-radius remify(12px)
+  font-family Helvetica
+  font-size remify(16px)
+  line-height remify(21px)
+  font-weight bold
+  letter-spacing 0px
+.button:hover
+  background-color $hover-blue
+.button:active
+  background-color $active-blue
+.button:disabled
+  background-color $background-disabled
+  color $text-gray
+  border 1px solid $border-gray
+
+.button-small
+  padding remify(7.5px) remify(35px)
