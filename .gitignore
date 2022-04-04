@@ -3,5 +3,4 @@ coverage
 test.http
 /dist
 .vscode
-build
 /tests
