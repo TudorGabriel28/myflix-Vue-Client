@@ -1,105 +1,69 @@
-# Purchase Request App
+# Myflix - Your personal database for movies and TV shows
+Myflix is a web application which offers users the possiblity to keep track of their watched movies from all platforms, review, rate and recommend them. The platform is also meant to be a social space, where the user can communicate with their friends and get new movies ideas from his friends' watched movies and reviews.
 
-## Git commands
+# Technology
+The client side of the application is based on Vue 3 framework together with Bootstrap 5.
 
-```javascript
-// refresh remote branches list
-git fetch origin --prune
+Check out the backend repository of this app -> https://github.com/TudorGabriel28/myflix-ASP.NET-Core
+# Interface and functionalities
 
-// create a new branch
-git checkout -b branch_name
+There are two types of accounts: user and admin. The user account contains all the customer functionalities of the web application, while the admin has additional capabilities like:
+* Get, Create, Update and Delete any user
+* Delete movies
 
-// switch branch
-git checkout branch_name
+More details will follow in [Admin Pages](#admin-pages)
 
-// list local branches
-git branch
+![First page](https://user-images.githubusercontent.com/61846679/148544865-3732e07b-1974-484c-b808-6ba1e6641ab7.png)
 
-// delete a local branch
-git branch -D branch_name
+## Login
 
-// rebase with the main branch
-git rebase main
+After you registered and confirmed your email address, you can login into your account.
 
-// after rebase, push the branch to origin
-git push origin --force branch_name
+![Login Page](https://user-images.githubusercontent.com/61846679/148546055-1562595c-f101-45e3-aeff-ef9f9f818c8a.png)
 
-// merge branch
-git merge --no-ff branch_name
+## Main page
+ 
+ Here you can see all the movies added by you in your lists. You can search for any movie in the database, read about it and if you want to see it in the future add it in your wish list or watched list if you have already seen the movie.
+ If the movie doesn't exist in the myflix database you can add it through "Add Movie" page.
+ 
+ ![Home page](https://user-images.githubusercontent.com/61846679/148546694-61e2b537-85e9-4e42-857f-6dcc4e94ea8b.png)
+ 
+## Add a movie
+ The method in which you can add a new movie is the following: 
+  The user needs to go to the Imdb Webpage of the desired movie and copy the part of the URL that contains the movie Id. This id always starts with "tt" letters followed by 7 digits. After this, he will paste the copied id in the secific field from the ![Add movie] page and the movie is added to the database. This feature is possible by making a request to the Data-Imdb Api from RapidAPI.
+  This is a free API service that provides a JSON object with all the details of the movie. You can read more about this API here: https://rapidapi.com/SAdrian/api/data-imdb1/
+  
+![Add movie page](https://user-images.githubusercontent.com/61846679/158264438-8d3e59c0-c7b4-4405-9e6d-da04e053d48b.png)
 
-// list commits
-git log
+## Friends
 
-// hide file changes
-git stash
+The secondary purpose of this web app, besides keeping an archive with all of your seen or wish to see movies, is to also be a community. In this sense, you can be friends with other users and see their favourites movies. (if the user has a public account)
 
-// show stashed changes
-git stash apply
+![Friends page](https://user-images.githubusercontent.com/61846679/148549658-ca91f256-0ca0-4854-ace9-a45c2bcb654c.png)
 
-// move commits from one branch to another
-git cherry-pick commit_id
-```
+## Admin pages
 
-## Git flow
+### Users
 
-- Working on a separate branch
+On Users page an admin can view, search or delete any user in the database.
 
-```javascript
-// commit changes on your branch
-git add ./changed_file
-git commit -m 'Commit message'
+![Users page](https://user-images.githubusercontent.com/61846679/148549810-92750a86-4db4-46bb-abf8-2c41e8dd67c9.png)
 
-// then push your branch to the origin
-git push origin some_branch
+### Movie Requests
 
-// after you finished your work on that branch merge it into stage
+On this page the admin will be able to see the movies added to the database and delete them.
 
-// go to stage
-git checkout stage
+![Requests page](https://user-images.githubusercontent.com/61846679/158267882-98971d49-e073-43bf-a148-e56e462f16b9.png)
 
-// make sure your local stage is up to date
-git pull origin stage
+# What are the next steps
 
-// merge your branch into stage
-git merge --no-ff some_branch
+On the frontend, all the basic functionality was implemented and the following tasks will be completed in the near future:
+- [ ] Add Movie page
+- [ ] Friends
+- [ ] User Profile
+- [ ] Admin pages
 
-// then push stage to the origin
-git push origin stage
-```
 
-- After your branch was tested on stage and everything it's ok you can merge it into the main branch
 
-```javascript
-// go to main
-git checkout main
 
-// make sure your main is up to date
-git pull origin main
 
-// go to your branch
-git checkout some_branch
-
-// rebase your branch with the main
-git rebase main
-
-// if there are some conflicts fix them and continue
-git rebase --continue
-
-// push your branch to origin
-git push origin some_branch --force
-
-// go to main
-git checkout main
-
-// merge your branch into the main branch
-git merge --no-ff some_branch
-
-// push main to the origin
-git push origin main
-
-// delete local branch
-git branch -D some_branch
-
-// delete remote branch
-git push origin --delete some_branch
-```
