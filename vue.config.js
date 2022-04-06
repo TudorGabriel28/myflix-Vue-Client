@@ -9,7 +9,6 @@ module.exports = {
     }
   },
   devServer: {
-    proxy: 'https://localhost:7129',
-    port: 7129
+    proxy: 'https://myflixapi.azurewebsites.net'
   }
 };

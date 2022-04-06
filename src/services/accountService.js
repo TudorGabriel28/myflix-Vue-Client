@@ -3,14 +3,14 @@ import { apiClient } from '../utils/apiClient';
 class AccountService {
 
   async authenticate(credentials) {
-    return await apiClient.post('/Account/authenticate', credentials);
+    return await apiClient.post('/account/authenticate', credentials);
   }
   async registerUser(credentials) {
-    await apiClient.post('/api/users/register', credentials);
+    await apiClient.post('/account/register', credentials);
   }
 
-  async activateAccount(userId) {
-    await apiClient.get(`/api/users/activation/${userId}`);
+  async activateAccount(token) {
+    await apiClient.get('account/verify-email', token);
   }
 
   async sendForgotPasswordEmail(email) {
