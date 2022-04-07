@@ -5,6 +5,10 @@ class MovieService {
     return await apiClient.get('/movies', { params: movieParameters });
   }
 
+  async getMovie(movieId) {
+    return await apiClient.get(`/movies/${movieId}`);
+  }
+
   async addMovie(createMovieRequest) {
     return await apiClient.post('/movies', createMovieRequest);
   }

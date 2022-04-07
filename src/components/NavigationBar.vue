@@ -1,22 +1,22 @@
 <template lang="pug">
 .navbar.pt-4.pb-5
-  .navbar-brand.mx-4
+  .navbar-brand
     img(src='../assets/images/myflix.png')
 
   .navbar-nav.me-auto.mb-2.mb-lg-0.flex-row.ms-5(v-if='isLoggedIn')
-    router-link.nav-item.me-3(:to='{ name: "HomePage" }') Home
-    router-link.nav-item.me-3(:to='{ name: "HomePage" }') Categories
-    router-link.nav-item.me-3(:to='{ name: "HomePage" }') Friends
-    router-link.nav-item.me-3(:to='{ name: "AddMovie" }') Add Movie
+    router-link.nav-item.pe-3(:to='{ name: "HomePage" }') Home
+    router-link.nav-item.pe-3(:to='{ name: "HomePage" }') Categories
+    router-link.nav-item.pe-3(:to='{ name: "HomePage" }') Friends
+    router-link.nav-item.pe-1(:to='{ name: "AddMovie" }') Add Movie
 
-  Search(@searchKeyword='searchInput', v-if='isLoggedIn')
+  Search.px-5(@searchKeyword='searchInput', v-if='isLoggedIn')
 
   .dropdown(
     v-if='isLoggedIn',
     @click='toggleDropdown',
     v-click-outside='removeDropdown'
   )
-    i.fas.fa-user-circle.mx-4(
+    i.fas.fa-user-circle(
       type='button',
       data-bs-toggle='dropdown',
       aria-expanded='false'
@@ -65,7 +65,10 @@ export default {
     };
 
     const searchInput = async (keyword) => {
-      router.push({ name: 'MovieList', query: { title: keyword } });
+      router.push({
+        name: 'MovieList',
+        query: { title: keyword, titleList: `Search Results for '${keyword}'` }
+      });
     };
 
     return {
@@ -94,7 +97,7 @@ i
   border-color: #fff;
 
 .navbar
-  padding: 0 10rem
+  padding: 0 5%
 
 .nav-item
   text-decoration: none

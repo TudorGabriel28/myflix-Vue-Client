@@ -1,28 +1,28 @@
 <template lang="pug">
-.row.mx-5
+.row
   .col-8.my-0
-    input.my-0.input-small(placeholder='Search your requests' v-model='keyword')
+    input.my-0.input-small(placeholder='Search a movie', v-model='keyword')
   .col-4
     button.button-small.px-3(@click='searchKeyword') Search
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
 export default {
-name: 'Search',
-emits: ['searchKeyword'],
-setup(props, context) {
-  const keyword = ref('')
+  name: 'Search',
+  emits: ['searchKeyword'],
+  setup(props, context) {
+    const keyword = ref('');
 
-  function searchKeyword() {
-    context.emit('searchKeyword', keyword.value)
+    function searchKeyword() {
+      context.emit('searchKeyword', keyword.value);
+    }
+    return {
+      keyword,
+      searchKeyword
+    };
   }
-  return {
-    keyword,
-    searchKeyword
-  }
-}
-}
+};
 </script>
 
 <style lang="stylus" scoped>
