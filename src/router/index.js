@@ -8,6 +8,7 @@ import AccountActivation from '../views/AccountActivation.vue';
 import PageNotFound from '../views/PageNotFound.vue';
 import LandingPage from '../views/LandingPage.vue';
 import MovieList from '../views/MovieList.vue';
+import AddMovie from '../views/AddMovie.vue';
 
 import store from '../store';
 
@@ -70,6 +71,12 @@ const routes = [
     path: '/list',
     name: 'MovieList',
     component: MovieList,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/add-movie',
+    name: 'AddMovie',
+    component: AddMovie,
     meta: { requiresAuth: true }
   },
   {

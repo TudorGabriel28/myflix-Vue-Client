@@ -7,13 +7,21 @@
     router-link.nav-item.me-3(:to='{ name: "HomePage" }') Home
     router-link.nav-item.me-3(:to='{ name: "HomePage" }') Categories
     router-link.nav-item.me-3(:to='{ name: "HomePage" }') Friends
-    router-link.nav-item.me-3(:to='{ name: "HomePage" }') Add Movie
+    router-link.nav-item.me-3(:to='{ name: "AddMovie" }') Add Movie
 
-  Search(@searchKeyword='searchInput' v-if='isLoggedIn')
+  Search(@searchKeyword='searchInput', v-if='isLoggedIn')
 
-  .dropdown(v-if='isLoggedIn' @click='toggleDropdown' v-click-outside='removeDropdown')
-    i.fas.fa-user-circle.mx-4(type='button' data-bs-toggle='dropdown' aria-expanded='false')
-    ul#dropdown-menu.dropdown-menu(aria-labelledby='dropdownMenuButton1' )
+  .dropdown(
+    v-if='isLoggedIn',
+    @click='toggleDropdown',
+    v-click-outside='removeDropdown'
+  )
+    i.fas.fa-user-circle.mx-4(
+      type='button',
+      data-bs-toggle='dropdown',
+      aria-expanded='false'
+    )
+    ul#dropdown-menu.dropdown-menu(aria-labelledby='dropdownMenuButton1')
       li
         router-link.dropdown-item(:to='{ name: "Login" }') Edit profile
       li
@@ -22,15 +30,14 @@
         hr.dropdown-divider
       li
         button.dropdown-item(@click='logout') Logout
-
 </template>
 
 <script>
 import Search from './Search.vue';
 import { useRouter } from 'vue-router';
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 import { computed } from 'vue';
-import { clickOutside } from '../directives/clickOutside'
+import { clickOutside } from '../directives/clickOutside';
 import { ref, watch } from 'vue';
 import { movieService } from '../services/movieService';
 export default {
@@ -40,27 +47,26 @@ export default {
     clickOutside
   },
   setup() {
-
     const store = useStore();
     const router = useRouter();
 
     const logout = () => {
-      store.dispatch('logout')
-      router.push({name: 'Login'})
-    }
+      store.dispatch('logout');
+      router.push({ name: 'Login' });
+    };
 
     const isLoggedIn = computed(() => store.getters.isLoggedIn);
 
     const toggleDropdown = () => {
-      document.getElementById('dropdown-menu').classList.toggle('show')
-    }
+      document.getElementById('dropdown-menu').classList.toggle('show');
+    };
     const removeDropdown = () => {
-      document.getElementById('dropdown-menu').classList.remove('show')
-    }
+      document.getElementById('dropdown-menu').classList.remove('show');
+    };
 
     const searchInput = async (keyword) => {
-      router.push({name: 'MovieList', query: {title: keyword}});
-    }
+      router.push({ name: 'MovieList', query: { title: keyword } });
+    };
 
     return {
       logout,
@@ -68,11 +74,9 @@ export default {
       toggleDropdown,
       removeDropdown,
       searchInput
-    }
+    };
   }
-
 };
-
 </script>
 
 <style lang="stylus" scoped>

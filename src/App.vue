@@ -5,16 +5,16 @@ router-view
 
 <script>
 import NavigationBar from './components/NavigationBar.vue';
-import { apiClient } from './utils/apiClient'
+import { apiClient } from './utils/apiClient';
 
 export default {
   components: {
     NavigationBar
   },
   created() {
-    const token = localStorage.getItem('token')
-    if(token) {
-      this.$store.dispatch('setToken', token)
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.$store.dispatch('setToken', token);
       apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
   }
@@ -42,6 +42,7 @@ export default {
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
   color $text-white
+  overflow-x: hidden
 
 body
   background-image: url("./assets/images/landingpage-background.png")
