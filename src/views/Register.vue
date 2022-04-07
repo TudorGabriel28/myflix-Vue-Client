@@ -4,22 +4,56 @@
     .form-container.px-5.py-5
       h3.h3.title(data-test-id='title') Sign Up
       form(@submit.prevent='registerUser')
-        input.input(type='text', placeholder='Name', v-model='name', data-test-id="register-name-input")
-        span.red(data-test-id='register-name-error') {{nameError}}
-        input.input(type='text', placeholder='Email address', v-model='email', data-test-id="register-email-input")
-        span.red(data-test-id='register-email-error') {{emailError}}
-        input.input(type='password', placeholder='Password', v-model='password', data-test-id="register-password-input")
-        span.red(data-test-id='register-password-error') {{passwordError}}
-        input.input(type='password', placeholder='Confirm password', v-model='confirmPassword', data-test-id="register-confirm-password-input")
-        span.red(data-test-id='register-confirm-password-error') {{confirmPasswordError}}
+        input.input(
+          type='text',
+          placeholder='First Name',
+          v-model='firstname',
+          data-test-id='register-first-name-input'
+        )
+        span.red(data-test-id='register-first-name-error') {{ firstNameError }}
+        input.input(
+          type='text',
+          placeholder='Last Name',
+          v-model='lastname',
+          data-test-id='register-last-name-input'
+        )
+        span.red(data-test-id='register-last-name-error') {{ lastNameError }}
+        input.input(
+          type='text',
+          placeholder='Nickname',
+          v-model='nickname',
+          data-test-id='register-nickname-input'
+        )
+        input.input(
+          type='text',
+          placeholder='Email address',
+          v-model='email',
+          data-test-id='register-email-input'
+        )
+        span.red(data-test-id='register-email-error') {{ emailError }}
+        input.input(
+          type='password',
+          placeholder='Password',
+          v-model='password',
+          data-test-id='register-password-input'
+        )
+        span.red(data-test-id='register-password-error') {{ passwordError }}
+        input.input(
+          type='password',
+          placeholder='Confirm password',
+          v-model='confirmPassword',
+          data-test-id='register-confirm-password-input'
+        )
+        span.red(data-test-id='register-confirm-password-error') {{ confirmPasswordError }}
         .pt-5
-          button.button(type='submit' ) Sign Up
+          button.button(type='submit') Sign Up
       .form-message
         p Already signed up? Use your email and password to
           router-link(:to='{ name: "Login" }') log in
 </template>
 
 <script>
+import { ref } from 'vue';
 import { accountService } from '../services/accountService';
 import { useField, useForm } from 'vee-validate';
 import {
@@ -31,10 +65,15 @@ import { Toast } from '../utils/toastAlert';
 
 export default {
   setup() {
+    const nickname = ref('');
     const { handleSubmit } = useForm();
 
-    const { errorMessage: nameError, value: name } = useField(
-      'name',
+    const { errorMessage: firstNameError, value: firstname } = useField(
+      'firstname',
+      nameValidation
+    );
+    const { errorMessage: lastNameError, value: lastname } = useField(
+      'lastname',
       nameValidation
     );
     const { errorMessage: emailError, value: email } = useField(
@@ -54,35 +93,44 @@ export default {
         return true;
       });
 
-    const registerUser = handleSubmit(async ({ name, email, password }) => {
-      try {
-        await accountService.registerUser({
-          name,
-          email,
-          password
-        });
+    const registerUser = handleSubmit(
+      async ({ firstname, lastname, email, password, confirmPassword }) => {
+        try {
+          await accountService.registerUser({
+            firstname,
+            lastname,
+            nickname: nickname.value,
+            email,
+            password,
+            confirmPassword,
+            acceptTerms: true
+          });
 
-        Toast.fire({
-          icon: 'success',
-          title: 'Register complete'
-        });
-      } catch (error) {
-        Toast.fire({
-          icon: 'error',
-          title: 'Something went wrong'
-        });
+          Toast.fire({
+            icon: 'success',
+            title: 'Register complete'
+          });
+        } catch (error) {
+          Toast.fire({
+            icon: 'error',
+            title: 'Something went wrong'
+          });
+        }
       }
-    });
+    );
 
     return {
       registerUser,
-      name,
-      nameError,
+      firstname,
+      lastname,
+      nickname,
       email,
-      emailError,
       password,
-      passwordError,
       confirmPassword,
+      firstNameError,
+      lastNameError,
+      emailError,
+      passwordError,
       confirmPasswordError
     };
   }

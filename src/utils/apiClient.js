@@ -3,7 +3,7 @@ import router from '../router';
 import store from '../store';
 
 export const apiClient = axios.create({
-  baseURL: 'https://myflixapi.azurewebsites.net/',
+  baseURL: 'https://myflixapi.azurewebsites.net',
   timeout: 5000,
   headers: { 'Content-Type': 'application/json' }
 });

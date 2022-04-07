@@ -1,5 +1,5 @@
 <template lang="pug">
-h2(data-test-id='title').h2.d-flex.align-items-center.justify-content-center Your account has been activated.
+h2.h2.d-flex.align-items-center.justify-content-center(data-test-id='title') Your account has been activated.
   h4 Go to
     router-link(:to='{ name: "Login" }') login
 </template>
@@ -16,7 +16,7 @@ export default {
 
     onMounted(async () => {
       try {
-        await accountService.activateAccount(route.params.userId);
+        await accountService.activateAccount(route.params.token);
       } catch (error) {
         router.push({
           name: 'Login',

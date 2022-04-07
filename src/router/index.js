@@ -28,7 +28,7 @@ const routes = [
   },
   {
     path: '/welcome',
-    name: "LandingPage",
+    name: 'LandingPage',
     component: LandingPage,
     meta: { forVisitor: true }
   },
@@ -56,7 +56,7 @@ const routes = [
     component: ResetPassword
   },
   {
-    path: '/account-activation/:userId',
+    path: '/verify-email/:token',
     name: 'AccountActivation',
     component: AccountActivation
   },
@@ -93,12 +93,11 @@ router.beforeEach((to, from) => {
   }
 
   if (
-    to.meta.forVisitor &&
-    store.getters.isLoggedIn ||
-    !to.meta.forVisitor &&
-    store.getters.isLoggedIn &&
-    !isAdmin &&
-    to.meta.forAdmin
+    (to.meta.forVisitor && store.getters.isLoggedIn) ||
+    (!to.meta.forVisitor &&
+      store.getters.isLoggedIn &&
+      !isAdmin &&
+      to.meta.forAdmin)
   ) {
     return {
       path: '/home'

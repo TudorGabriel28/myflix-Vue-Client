@@ -1,7 +1,6 @@
 import { apiClient } from '../utils/apiClient';
 
 class AccountService {
-
   async authenticate(credentials) {
     return await apiClient.post('/account/authenticate', credentials);
   }
@@ -10,7 +9,7 @@ class AccountService {
   }
 
   async activateAccount(token) {
-    await apiClient.get('account/verify-email', token);
+    await apiClient.post('account/verify-email', { token });
   }
 
   async sendForgotPasswordEmail(email) {
