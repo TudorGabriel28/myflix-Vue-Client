@@ -28,7 +28,7 @@ export default {
     const titleList = route.query.titleList;
     const paginationParams = ref({});
     const movies = ref([]);
-    let movieParams = ref({ pageSize: 30, currentPage: 1 });
+    const movieParams = ref({ pageSize: 30, currentPage: 1 });
     if (route.query.pageSize) {
       movieParams.value['pageSize'] = route.query.pageSize;
     }
@@ -38,8 +38,11 @@ export default {
     if (route.query.title) {
       movieParams.value['title'] = route.query.title;
     }
+    onMounted(async () => await moviesRequest());
 
-    onMounted(async () => {
+    watch(movieParams, async () => await moviesRequest());
+
+    const moviesRequest = async () => {
       var response;
       if (route.query.isWishlist) {
         response = await wishListService.getWishList(movieParams.value);
@@ -48,22 +51,10 @@ export default {
       } else {
         response = await movieService.getMovies(movieParams.value);
       }
-      paginationParams.value = response.headers['x-pagination'];
-      movies.value = response.data;
-    });
+      paginationParams.value = JSON.parse(response.headers['x-pagination']);
 
-    watch(movieParams, async () => {
-      var response;
-      if (route.query.isWishlist) {
-        response = await wishListService.getWishList(movieParams.value);
-      } else if (route.query.isWatchedList) {
-        response = await watchedListService.getWatchedList(movieParams.value);
-      } else {
-        response = await movieService.getMovies(movieParams.value);
-      }
-      paginationParams.value = response.headers['x-pagination'];
       movies.value = response.data;
-    });
+    };
 
     const changeCurrentPage = () => {
       movieParams.value.currentPage += 1;

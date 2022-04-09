@@ -1,15 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Login from '../views/Login.vue';
-import Register from '../views/Register.vue';
-import ForgotPassword from '../views/ForgotPassword.vue';
-import ResetPassword from '../views/ResetPassword.vue';
 import HomePage from '../views/HomePage.vue';
-import AccountActivation from '../views/AccountActivation.vue';
-import PageNotFound from '../views/PageNotFound.vue';
-import LandingPage from '../views/LandingPage.vue';
-import MovieList from '../views/MovieList.vue';
-import AddMovie from '../views/AddMovie.vue';
-import Movie from '../views/Movie.vue';
 import store from '../store';
 
 const routes = [
@@ -30,36 +20,48 @@ const routes = [
   {
     path: '/welcome',
     name: 'LandingPage',
-    component: LandingPage,
+    component: () =>
+      import(/* webpackChunkName: "LandingPage" */ '../views/LandingPage.vue'),
     meta: { forVisitor: true }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: () =>
+      import(/* webpackChunkName: "Login" */ '../views/Login.vue'),
     meta: { forVisitor: true }
   },
   {
     path: '/register',
     name: 'Register',
-    component: Register,
+    component: () =>
+      import(/* webpackChunkName: "Register" */ '../views/Register.vue'),
     meta: { forVisitor: true }
   },
   {
     path: '/forgot-password',
     name: 'ForgotPassword',
-    component: ForgotPassword,
+    component: () =>
+      import(
+        /* webpackChunkName: "ForgotPassword" */ '../views/ForgotPassword.vue'
+      ),
     meta: { forVisitor: true }
   },
   {
     path: '/reset-password/:id/:token',
     name: 'ResetPassword',
-    component: ResetPassword
+    component: () =>
+      import(
+        /* webpackChunkName: "ResetPassword" */ '../views/ResetPassword.vue'
+      )
   },
   {
     path: '/verify-email/:token',
     name: 'AccountActivation',
-    component: AccountActivation
+    component: () =>
+      import(
+        /* webpackChunkName: "AccountActivation" */ '../views/AccountActivation.vue'
+      )
   },
   {
     path: '/home',
@@ -70,24 +72,28 @@ const routes = [
   {
     path: '/list',
     name: 'MovieList',
-    component: MovieList,
+    component: () =>
+      import(/* webpackChunkName: "MovieList" */ '../views/MovieList.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/movie/:id',
     name: 'Movie',
-    component: Movie,
+    component: () =>
+      import(/* webpackChunkName: "Movie" */ '../views/Movie.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/add-movie',
     name: 'AddMovie',
-    component: AddMovie,
+    component: () =>
+      import(/* webpackChunkName: "AddMovie" */ '../views/AddMovie.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/:pathMatch(.*)*',
-    component: PageNotFound
+    component: () =>
+      import(/* webpackChunkName: "PageNotFound" */ '../views/PageNotFound.vue')
   }
 ];
 
