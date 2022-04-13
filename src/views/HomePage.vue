@@ -1,5 +1,5 @@
 <template lang="pug">
-.full-container.col-lg-10.offset-lg-1
+.col-md-10.offset-md-1
   .col(v-for='(movieList, index) in movieLists', :key='index')
     MovieListPreview(:movieList="movieList")
 </template>

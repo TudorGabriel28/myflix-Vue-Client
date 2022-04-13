@@ -1,7 +1,7 @@
 <template lang="pug">
-.full-container
+.col-md-10.offset-md-1
   h3.h3.mb-4 {{ titleList }}
-  .d-flex.flex-row.flex-wrap
+  .d-flex.flex-row.flex-wrap.justify-content-center
     .me-3.my-3(v-for='(movie, index) in movies', :key='index')
       router-link.movie-preview(:to='{ path: `/movie/${movie.id}` }')
         img.movie-img(:src='movie.primaryImage.url', width='165', height='244')
