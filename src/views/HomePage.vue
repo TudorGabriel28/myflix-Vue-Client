@@ -1,5 +1,5 @@
 <template lang="pug">
-.full-container
+.full-container.col-lg-10.offset-lg-1
   .col(v-for='(movieList, index) in movieLists', :key='index')
     MovieListPreview(:movieList="movieList")
 </template>
@@ -16,17 +16,17 @@ export default {
   setup() {
     var movieLists = ref([]);
     onMounted(async () => {
-      var response = await wishListService.getWishList({pageSize: 8});
-      movieLists.value.push({items: response.data, pageSize: 8 , titleList: "My wishlist", isWishList: true});
+      var response = await wishListService.getWishList({pageSize: 9});
+      movieLists.value.push({items: response.data, pageSize: 9 , titleList: "My wishlist", isWishList: true});
 
-      response = await watchedListService.getWatchedList({pageSize: 8});
-      movieLists.value.push({items: response.data, pageSize: 8 , titleList: "Watched Movies", isWatchedList: true});
+      response = await watchedListService.getWatchedList({pageSize: 9});
+      movieLists.value.push({items: response.data, pageSize: 9 , titleList: "Watched Movies", isWatchedList: true});
 
-      response = await movieService.getMovies({pageSize: 8})
-      movieLists.value.push({items: response.data, pageSize: 8  , titleList: "Recent added on Myflix"});
+      response = await movieService.getMovies({pageSize: 9})
+      movieLists.value.push({items: response.data, pageSize: 9  , titleList: "Recent added on Myflix"});
 
-      response = await movieService.getMovies({pageSize: 8, genre: 'Action'})
-      movieLists.value.push({items: response.data, pageSize: 8, genre: 'Action' , titleList: "Recent added in Action"});
+      response = await movieService.getMovies({pageSize: 9, genre: 'Action'})
+      movieLists.value.push({items: response.data, pageSize: 9, genre: 'Action' , titleList: "Recent added in Action"});
     });
 
     onBeforeMount(() => {
@@ -41,6 +41,5 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .full-container
-    padding: 0 7rem
+
 </style>

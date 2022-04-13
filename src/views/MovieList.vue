@@ -3,9 +3,9 @@
   h3.h3.mb-4 {{ titleList }}
   .d-flex.flex-row.flex-wrap
     .me-3.my-3(v-for='(movie, index) in movies', :key='index')
-      router-link.router-link(:to='{ path: `/movie/${movie.id}` }')
+      router-link.movie-preview(:to='{ path: `/movie/${movie.id}` }')
         img.movie-img(:src='movie.primaryImage.url', width='165', height='244')
-        p.movie-title.mt-1 {{ movie.title }}
+        p.movie-title-preview.mt-1 {{ movie.title }}
   Pagination(
     @currentPage='changeCurrentPage',
     :paginationParams='paginationParams'
@@ -81,13 +81,5 @@ export default {
 
 .full-container
   padding: 0 5rem
-
-.movie-title
-  max-width: 165px
-  font-weight: bold
-
-.router-link
-  color: $text-white !important
-  text-decoration: none
 
 </style>

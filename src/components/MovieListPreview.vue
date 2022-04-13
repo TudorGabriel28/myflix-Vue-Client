@@ -3,13 +3,13 @@ h4.h4.my-3 {{ movieList.titleList }}
 .row
   p.mb-4(v-if='!movieList.items[0]') No movies added in this list so far.
   .scroll-list(v-else)
-    img.movie-img.mx-1(
-      :src='movie.primaryImage.url',
-      width='165',
-      height='244',
-      v-for='(movie, index) in movieList.items',
-      :key='index'
-    )
+    router-link.movie-preview.align-top(:to='{ path: `/movie/${movie.id}` }', v-for='(movie, index) in movieList.items', :key='index')
+      img.movie-img.mx-1(
+        :src='movie.primaryImage.url',
+        width='165',
+        height='244',
+      )
+      p.movie-title-preview.mt-1 {{ movie.title }}
   router-link.view-more(:to='{ name: "MovieList", query: queryParams }') View More
 </template>
 
@@ -48,5 +48,6 @@ export default {
 
 .view-more
   text-align: right
+
 
 </style>
